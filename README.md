@@ -1,40 +1,58 @@
 # rlgames
 
-A repository for implementing and experimenting with various reinforcement learning algorithms and environments in Python.
+> **[!note]**  
+> this is just a toy repository for learning reinforcement learning stuff
 
-## Implemented Algorithms
+some reinforcement learning algorithms and environments i've implemented in python. nothing fancy, just code to understand how different rl methods work.
 
-### Dynamic Programming
+## algorithms
 
-*   **Policy Iteration**: Solves a GridWorld environment by iteratively evaluating and improving a policy.
-    *   `dp/policy-iter/pi_gridworld.py`
-*   **Value Iteration**: Solves GridWorld and CliffWalking environments by finding the optimal value function.
-    *   `dp/value-iter/vi_gridworld.py`
-    *   `dp/value-iter/vi_cliff_walking.py`
+### dynamic programming
+solving problems when you know the environment model.
 
-### Deep Q-Network (DQN)
+- **policy iteration** - improves policies step by step in gridworld
+  - [`dp/policy-iter/pi_gridworld.py`](dp/policy-iter/pi_gridworld.py)
+- **value iteration** - finds optimal values for each state
+  - [`dp/value-iter/vi_gridworld.py`](dp/value-iter/vi_gridworld.py)
+  - [`dp/value-iter/vi_cliff_walking.py`](dp/value-iter/vi_cliff_walking.py)
 
-*   **DQN for Snake**: A Deep Q-Learning agent that learns to play the classic game of Snake.
-    *   `dqn-snake/`
+### deep q-network (dqn)
+using neural networks for q-learning.
 
-### Temporal Difference (TD) Learning
+- **dqn for snake** - neural network learns to play snake
+  - [`dqn-snake/`](dqn-snake/)
 
-*   **Q-Learning**: An off-policy TD control algorithm used to solve a Maze environment.
-    *   `td-learning/q-learning/q-learning.py`
-*   **SARSA**: An on-policy TD control algorithm, also used to solve the Maze environment.
-    *   `td-learning/sarsa/sarsa.py`
+### temporal difference learning
+learning directly from experience without knowing the environment.
 
-## Environments
+- **q-learning** - learns optimal actions for each state
+  - [`td-learning/q-learning/q-learning.py`](td-learning/q-learning/q-learning.py)
+- **sarsa** - learns while following a specific policy
+  - [`td-learning/sarsa/sarsa.py`](td-learning/sarsa/sarsa.py)
 
-*   **GridWorld**: A simple 4x4 grid where the agent's goal is to reach a terminal state.
-*   **CliffWalking**: A 4x12 grid where the agent must find a path to the goal while avoiding a cliff.
-*   **Snake**: The classic game of Snake, where an agent controls a snake to eat food and grow longer.
-*   **Maze**: A 5x5 maze that the agent must navigate to find the goal.
+### function approximation
+handling continuous state spaces with linear approximation.
 
-## How to Run
+- **linear function approximation** - sarsa with tile coding for mountaincar
+  - [`function-approximation/linear/mountain-car.py`](function-approximation/linear/mountain-car.py)
 
-Each algorithm is implemented as a standalone Python script. To run any of the implementations, simply execute the corresponding Python file. For example:
+## environments
+
+| environment | description | difficulty |
+|-------------|-------------|------------|
+| gridworld | simple 4x4 grid navigation | easy |
+| cliffwalking | 4x12 grid with dangerous cliff edge | medium |
+| snake | classic snake game | hard |
+| maze | 5x5 maze navigation | medium |
+| mountaincar | get car up hill with continuous states | medium |
+
+## running the code
+
+just run any python file directly:
 
 ```bash
 python dp/policy-iter/pi_gridworld.py
+python dqn-snake/main.py
+python td-learning/q-learning/q-learning.py
+python function-approximation/linear/mountain-car.py
 ```
