@@ -1,4 +1,4 @@
-# rl algorithms 
+# rl algorithms
 
 > [!NOTE]
 > this is just a toy repository for learning reinforcement learning stuff
@@ -21,9 +21,12 @@ this repository contains implementations of several fundamental reinforcement le
     *   dqn for the game of snake
 *   **policy gradient methods:**
     *   reinforce
+    *   reinforce with baseline
+    *   continuous reinforce
+    *   natural policy gradient
 *   **function approximation:**
-    *   linear function approximation with tile coding
-    *   non-linear function approximation with neural networks
+    *   sarsa with linear function approximation (tile coding)
+    *   comparison of non-linear function approximation methods (td with experience replay, semi-gradient td(0), monte carlo with vfa)
 
 ## algorithms
 
@@ -60,14 +63,20 @@ policy gradient methods directly optimize the policy by performing gradient asce
 
 *   **reinforce:** a monte carlo policy gradient algorithm that updates the policy based on the return of entire episodes.
     *   implementation: [`policy-gradients/reinforce.py`](policy-gradients/reinforce.py)
+*   **reinforce with baseline:** an actor-critic style algorithm that reduces variance by subtracting a state-value baseline.
+    *   implementation: [`policy-gradients/actor_critic_variants.py`](policy-gradients/actor_critic_variants.py)
+*   **continuous reinforce:** reinforce adapted for continuous action spaces using a gaussian policy.
+    *   implementation: [`policy-gradients/actor_critic_variants.py`](policy-gradients/actor_critic_variants.py)
+*   **natural policy gradient:** a more advanced policy gradient method that uses the fisher information matrix for more stable updates.
+    *   implementation: [`policy-gradients/actor_critic_variants.py`](policy-gradients/actor_critic_variants.py)
 
 ### function approximation
 
 function approximation is used to handle large or continuous state spaces by approximating the value function or policy.
 
-*   **linear function approximation:** uses tile coding to approximate the value function for the mountain car environment.
+*   **sarsa with linear function approximation:** uses tile coding to approximate the q-value function for the mountain car environment.
     *   implementation: [`function-approximation/linear/mountain-car.py`](function-approximation/linear/mountain-car.py)
-*   **non-linear function approximation:** uses a neural network to approximate the value function.
+*   **comparison of non-linear function approximation methods:** compares td with experience replay, semi-gradient td(0), and monte carlo with value function approximation.
     *   implementation: [`function-approximation/non-linear/mountain-car.py`](function-approximation/non-linear/mountain-car.py)
 
 ## environments
@@ -78,7 +87,7 @@ function approximation is used to handle large or continuous state spaces by app
 | cliff walking   | a 4x12 grid with a "cliff" to avoid.      | `dp/value-iter/vi_cliff_walking.py`                 |
 | maze            | a 5x5 maze for navigation.                | `td-learning/`                                      |
 | snake           | the classic game of snake.                | `dqn-snake/`                                        |
-| mountain car    | a classic control problem.                | `function-approximation/`                           |
+| mountain car    | a classic control problem.                | `function-approximation/linear/mountain-car.py`     |
 | cartpole        | a classic control problem.                | `policy-gradients/`                                 |
 
 ## how to run
@@ -89,6 +98,7 @@ to run any of the algorithms, simply execute the corresponding python script:
 # dynamic programming
 python dp/policy-iter/pi_gridworld.py
 python dp/value-iter/vi_gridworld.py
+python dp/value-iter/vi_cliff_walking.py
 
 # td learning
 python td-learning/q-learning/q-learning.py
@@ -99,6 +109,7 @@ python dqn-snake/agent.py
 
 # policy gradients
 python policy-gradients/reinforce.py
+python policy-gradients/actor_critic_variants.py
 
 # function approximation
 python function-approximation/linear/mountain-car.py
