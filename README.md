@@ -1,58 +1,116 @@
-# rlgames
+# rl algorithms 
 
-> **[!note]**  
+> [!NOTE]
 > this is just a toy repository for learning reinforcement learning stuff
 
-some reinforcement learning algorithms and environments i've implemented in python. nothing fancy, just code to understand how different rl methods work.
+# reinforcement learning algorithms
+
+a collection of reinforcement learning algorithms implemented in python for learning purposes.
+
+## what's inside?
+
+this repository contains implementations of several fundamental reinforcement learning algorithms, including:
+
+*   **dynamic programming:**
+    *   policy iteration
+    *   value iteration
+*   **temporal difference (td) learning:**
+    *   q-learning
+    *   sarsa
+*   **deep q-networks (dqn):**
+    *   dqn for the game of snake
+*   **policy gradient methods:**
+    *   reinforce
+*   **function approximation:**
+    *   linear function approximation with tile coding
+    *   non-linear function approximation with neural networks
 
 ## algorithms
 
 ### dynamic programming
-solving problems when you know the environment model.
 
-- **policy iteration** - improves policies step by step in gridworld
-  - [`dp/policy-iter/pi_gridworld.py`](dp/policy-iter/pi_gridworld.py)
-- **value iteration** - finds optimal values for each state
-  - [`dp/value-iter/vi_gridworld.py`](dp/value-iter/vi_gridworld.py)
-  - [`dp/value-iter/vi_cliff_walking.py`](dp/value-iter/vi_cliff_walking.py)
+dynamic programming methods are used when the environment's model is fully known.
 
-### deep q-network (dqn)
-using neural networks for q-learning.
+*   **policy iteration:** iteratively improves the policy and value function until an optimal policy is found.
+    *   implementation: [`dp/policy-iter/pi_gridworld.py`](dp/policy-iter/pi_gridworld.py)
+*   **value iteration:** finds the optimal value function by iteratively updating the value of each state.
+    *   implementations:
+        *   [`dp/value-iter/vi_gridworld.py`](dp/value-iter/vi_gridworld.py)
+        *   [`dp/value-iter/vi_cliff_walking.py`](dp/value-iter/vi_cliff_walking.py)
 
-- **dqn for snake** - neural network learns to play snake
-  - [`dqn-snake/`](dqn-snake/)
+### temporal difference (td) learning
 
-### temporal difference learning
-learning directly from experience without knowing the environment.
+td learning methods learn directly from raw experience without a model of the environment's dynamics.
 
-- **q-learning** - learns optimal actions for each state
-  - [`td-learning/q-learning/q-learning.py`](td-learning/q-learning/q-learning.py)
-- **sarsa** - learns while following a specific policy
-  - [`td-learning/sarsa/sarsa.py`](td-learning/sarsa/sarsa.py)
+*   **q-learning:** an off-policy td control algorithm that learns the optimal action-value function.
+    *   implementation: [`td-learning/q-learning/q-learning.py`](td-learning/q-learning/q-learning.py)
+*   **sarsa:** an on-policy td control algorithm that learns the action-value function relative to the policy being followed.
+    *   implementation: [`td-learning/sarsa/sarsa.py`](td-learning/sarsa/sarsa.py)
+
+### deep q-networks (dqn)
+
+dqn uses a deep neural network to approximate the q-value function, making it suitable for high-dimensional state spaces.
+
+*   **dqn for snake:** a dqn agent that learns to play the classic game of snake.
+    *   implementation: [`dqn-snake/`](dqn-snake/)
+
+### policy gradient methods
+
+policy gradient methods directly optimize the policy by performing gradient ascent on the expected return.
+
+*   **reinforce:** a monte carlo policy gradient algorithm that updates the policy based on the return of entire episodes.
+    *   implementation: [`policy-gradients/reinforce.py`](policy-gradients/reinforce.py)
 
 ### function approximation
-handling continuous state spaces with linear approximation.
 
-- **linear function approximation** - sarsa with tile coding for mountaincar
-  - [`function-approximation/linear/mountain-car.py`](function-approximation/linear/mountain-car.py)
+function approximation is used to handle large or continuous state spaces by approximating the value function or policy.
+
+*   **linear function approximation:** uses tile coding to approximate the value function for the mountain car environment.
+    *   implementation: [`function-approximation/linear/mountain-car.py`](function-approximation/linear/mountain-car.py)
+*   **non-linear function approximation:** uses a neural network to approximate the value function.
+    *   implementation: [`function-approximation/non-linear/mountain-car.py`](function-approximation/non-linear/mountain-car.py)
 
 ## environments
 
-| environment | description | difficulty |
-|-------------|-------------|------------|
-| gridworld | simple 4x4 grid navigation | easy |
-| cliffwalking | 4x12 grid with dangerous cliff edge | medium |
-| snake | classic snake game | hard |
-| maze | 5x5 maze navigation | medium |
-| mountaincar | get car up hill with continuous states | medium |
+| environment     | description                               | implemented in                                      |
+| --------------- | ----------------------------------------- | --------------------------------------------------- |
+| gridworld       | a simple 4x4 grid for navigation.         | `dp/`                                               |
+| cliff walking   | a 4x12 grid with a "cliff" to avoid.      | `dp/value-iter/vi_cliff_walking.py`                 |
+| maze            | a 5x5 maze for navigation.                | `td-learning/`                                      |
+| snake           | the classic game of snake.                | `dqn-snake/`                                        |
+| mountain car    | a classic control problem.                | `function-approximation/`                           |
+| cartpole        | a classic control problem.                | `policy-gradients/`                                 |
 
-## running the code
+## how to run
 
-just run any python file directly:
+to run any of the algorithms, simply execute the corresponding python script:
 
 ```bash
+# dynamic programming
 python dp/policy-iter/pi_gridworld.py
-python dqn-snake/main.py
+python dp/value-iter/vi_gridworld.py
+
+# td learning
 python td-learning/q-learning/q-learning.py
+python td-learning/sarsa/sarsa.py
+
+# dqn
+python dqn-snake/agent.py
+
+# policy gradients
+python policy-gradients/reinforce.py
+
+# function approximation
 python function-approximation/linear/mountain-car.py
+python function-approximation/non-linear/mountain-car.py
 ```
+
+## dependencies
+
+the following libraries are required to run the code:
+
+*   `numpy`
+*   `matplotlib`
+*   `torch`
+*   `gymnasium`
+*   `pygame`
