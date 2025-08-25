@@ -8,6 +8,7 @@ from torch.distributions import Categorical
 import gymnasium as gym
 import matplotlib.pyplot as plt
 
+# yoo this is reinforce algo
 
 class PolicyNetwork(nn.Module):
     """simple policy network that ouputs action probs"""
